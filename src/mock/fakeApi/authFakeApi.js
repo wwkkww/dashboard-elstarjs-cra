@@ -4,23 +4,24 @@ import isEmpty from 'lodash/isEmpty'
 
 export default function authFakeApi(server, apiPrefix) {
     server.post(`${apiPrefix}/sign-in`, (schema, { requestBody }) => {
-        const { userName, password } = JSON.parse(requestBody)
+        //! TODO to login with email or username
+        const { email, password } = JSON.parse(requestBody)
         const user = schema.db.signInUserData.findBy({
-            accountUserName: userName,
+            email: email,
             password,
         })
         console.log('user', user)
         if (user) {
-            const { avatar, userName, email, authority } = user
+            const { avatar, fullName, email, authority } = user
             return {
-                user: { avatar, userName, email, authority },
+                user: { avatar, fullName, email, authority },
                 token: 'wVYrxaeNa9OxdnULvde1Au5m5w63',
             }
         }
         return new Response(
             401,
             { some: 'header' },
-            { message: `userName: admin | password: 123Qwe` }
+            { message: `userName: admin | email: test@testmai.com | password: 123Qwe` }
         )
     })
 
@@ -29,14 +30,14 @@ export default function authFakeApi(server, apiPrefix) {
     })
 
     server.post(`${apiPrefix}/sign-up`, (schema, { requestBody }) => {
-        const { userName, password, email } = JSON.parse(requestBody)
+        const { fullName, password, email } = JSON.parse(requestBody)
         const userExist = schema.db.signInUserData.findBy({
-            accountUserName: userName,
+          email: email,
         })
         const emailUsed = schema.db.signInUserData.findBy({ email })
         const newUser = {
             avatar: '/img/avatars/thumb-1.jpg',
-            userName,
+            fullName,
             email,
             authority: ['admin', 'user'],
         }
@@ -64,7 +65,7 @@ export default function authFakeApi(server, apiPrefix) {
 
         schema.db.signInUserData.insert({
             ...newUser,
-            ...{ id: uniqueId('user_'), password, accountUserName: userName },
+            ...{ id: uniqueId('user_'), password, email, fullName },
         })
         return {
             user: newUser,

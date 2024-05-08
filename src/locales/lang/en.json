@@ -2,6 +2,9 @@
   "nav": {
     "apps": "Menu",
     "home": "Home",
+    "appsMain": {
+      "dashboard": "Main"
+    },
     "singleMenuItem": "Single menu item",
     "collapseMenu": {
       "collapseMenu": "Collapse menu item",

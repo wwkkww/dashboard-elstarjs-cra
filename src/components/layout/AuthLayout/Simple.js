@@ -11,7 +11,7 @@ const Simple = ({ children, content, ...rest }) => {
                     className="min-w-[320px] md:min-w-[450px]"
                     bodyClass="md:p-10"
                 >
-                    <div className="text-center">
+                    <div className="text-center pb-3">
                         <Logo type="streamline" imgClass="mx-auto" />
                     </div>
                     <div className="text-center">

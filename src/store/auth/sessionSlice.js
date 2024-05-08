@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+//! TODO: update with create createAsyncThunk and builder case pattern
 export const sessionSlice = createSlice({
     name: 'auth/session',
     initialState: {
