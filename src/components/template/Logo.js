@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { APP_NAME } from 'constants/app.constant'
@@ -8,6 +8,9 @@ const LOGO_SRC_PATH = '/img/logo/'
 const Logo = (props) => {
     const { type, mode, gutter, className, imgClass, style, logoWidth } = props
 
+    useEffect(() => {
+      console.log(props)
+    }, [])
     return (
         <div
             className={classNames('logo', className, gutter)}
